@@ -9,6 +9,7 @@ buildscript {
     }
 }
 
+
 group 'by.serzh'
 version '1.0-SNAPSHOT'
 
@@ -19,6 +20,18 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'by.serzh.MainKt'
+    }
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+sourceSets {
+    main.java.srcDirs += 'src/main/kotlin/'
+    test.java.srcDirs += 'src/test/kotlin/'
 }
 
 dependencies {
